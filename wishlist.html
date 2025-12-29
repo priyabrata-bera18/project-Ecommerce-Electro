@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist | Electro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Segoe+UI:wght@400;600;700&family=Geom:wght@400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Assets/bootstrap-5.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Wishlist Card */
+        body {
+            padding-top: 120px;
+        }
+
+        .wishlist-card {
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+            text-align: center;
+            padding: 15px;
+            transition: all .3s ease;
+        }
+
+        .wishlist-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .wishlist-card img {
+            height: 180px;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .wishlist-buttons button {
+            width: 48%;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .empty-state i {
+            font-size: 70px;
+            color: #ccc;
+        }
+
+        .toast-box {
+            visibility: hidden;
+            background: #28a745;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity .4s;
+        }
+
+        .toast-box.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="products.js"></script>
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="container my-5">
+        <h2 class="fw-bold mb-4">My Wishlist ❤️</h2>
+
+        <div class="row g-4" id="wishlist-container"></div>
+
+        <!-- Empty Message -->
+        <div id="empty-wishlist" class="empty-state d-none">
+            <i class="fa-solid fa-heart-circle-xmark"></i>
+            <p class="mt-3 text-muted fs-5">Your Wishlist is Empty</p>
+            <a href="index.html" class="btn btn-danger">Shop Now</a>
+        </div>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Toast -->
+    <div id="wishlist-toast" class="toast-box">Added to Cart ✔</div>
+
+    <script>
+$("#header-placeholder").load("header.html", function () {
+    updateWishlistCount();
+    updateHeaderCartCount();
+});
+
+
+        
+        $("#footer-placeholder").load("footer.html");
+
+        function loadWishlistUI() {
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+            if (wishlist.length === 0) {
+                $("#wishlist-container").hide();
+                $("#empty-wishlist").removeClass("d-none");
+                updateWishlistCount();
+                return;
+            } else {
+                $("#wishlist-container").show();
+                $("#empty-wishlist").addClass("d-none");
+            }
+
+            let html = "";
+            wishlist.forEach((item, index) => {
+                html += `
+      <div class="col-12 col-md-6 col-lg-3 wishlist-item" data-index="${index}">
+        <div class="wishlist-card">
+          <img src="${item.img}">
+          <h6 class="mt-2 fw-bold">${item.title}</h6>
+          <p class="text-danger fw-semibold">₹${item.price.toLocaleString()}</p>
+
+          <div class="wishlist-buttons d-flex justify-content-between mt-3">
+            <button class="btn btn-danger btn-sm add-to-cart" data-index="${index}">
+              🛒 Add to Cart
+            </button>
+            <button class="btn btn-outline-secondary btn-sm remove-item" data-index="${index}">
+              ✖ Remove
+            </button>
+          </div>
+        </div>
+      </div>`;
+            });
+
+            $("#wishlist-container").html(html);
+        }
+
+        $(document).on("click", ".remove-item", function () {
+            let i = $(this).data("index");
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            wishlist.splice(i, 1);
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            updateWishlistCount();
+            loadWishlistUI();
+        });
+
+        $(document).on("click", ".add-to-cart", function () {
+            let i = $(this).data("index");
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            let item = wishlist[i];
+
+            let cart = JSON.parse(localStorage.getItem("electroCart")) || [];
+            cart.push({ ...item, qty: 1 });
+            localStorage.setItem("electroCart", JSON.stringify(cart));
+
+            updateHeaderCartCount();
+            showToast();
+        });
+
+        function showToast() {
+            let toast = document.getElementById("wishlist-toast");
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show") }, 2500);
+        }
+
+        $(document).ready(loadWishlistUI);
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

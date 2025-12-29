@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Electro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Segoe+UI:wght@400;600;700&family=Geom:wght@400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Assets/bootstrap-5.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            padding-top: 180px;
+            background-color: #f8f9fa;
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2070&auto=format&fit=crop");
+            background-position: center;
+            background-size: cover;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* --- Cart Table Styles --- */
+        .cart-table-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background-color: #15161d;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-family: 'Geom', sans-serif;
+            letter-spacing: 1px;
+            font-weight: normal;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+            padding: 20px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            padding: 5px;
+        }
+
+        .qty-input-group {
+            width: 120px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .qty-btn {
+            background: #f8f9fa;
+            border: none;
+            width: 35px;
+            color: #333;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #e2e6ea;
+        }
+
+        .qty-input {
+            border: none;
+            text-align: center;
+            width: 50px;
+            font-weight: 600;
+            color: #333;
+            outline: none;
+        }
+
+        /* --- Cart Summary Box --- */
+        .cart-summary {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 120px;
+            /* Sticks on scroll */
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .checkout-btn {
+            background-image: linear-gradient(to right, #D10024, #ff2a2a);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(209, 0, 36, 0.4);
+            color: white;
+        }
+
+        /* --- Empty Cart State --- */
+        #empty-cart-msg {
+            display: none;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        #empty-cart-msg i {
+            font-size: 80px;
+            color: #eee;
+            margin-bottom: 20px;
+        }
+
+        /* --- Mobile Responsive Table --- */
+        @media (max-width: 768px) {
+            .table thead {
+                display: none;
+            }
+
+            .table,
+            .table tbody,
+            .table tr,
+            .table td {
+                display: block;
+                width: 100%;
+            }
+
+            .table tr {
+                margin-bottom: 15px;
+                border: 1px solid #eee;
+                border-radius: 10px;
+                padding: 15px;
+                position: relative;
+            }
+
+            .table td {
+                text-align: right;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #f8f8f8;
+            }
+
+            .table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #666;
+            }
+
+            .product-thumb {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cart-summary {
+                margin-top: 20px;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="products.js"></script>
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="page-header">
+        <h1 class="display-4 fw-bold">Shopping Cart</h1>
+    </div>
+
+    <div class="container py-5 my-4">
+
+        <div id="empty-cart-msg" style="display: none;">
+            <i class="fa-solid fa-cart-arrow-down"></i>
+            <h2 class="fw-bold text-dark">Your Cart is Empty</h2>
+            <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+            <a href="index.html" class="btn btn-danger rounded-pill px-5 py-2 fw-bold">Start Shopping</a>
+        </div>
+
+        <div class="row g-4" id="cart-content">
+
+            <div class="col-lg-8">
+                <div class="cart-table-container">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <h4 class="fw-bold mb-4" style="font-family: 'Geom', sans-serif;">Cart Totals</h4>
+                    <div class="summary-item">
+                        <span class="text-muted">Subtotal</span>
+                        <span class="fw-bold">₹<span id="subtotal">0</span></span>
+                    </div>
+                    <div class="summary-item align-items-center">
+                        <span class="text-muted">Shipping</span>
+                        <div class="text-end">
+                            <span class="text-success fw-bold">Free Shipping</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="summary-item mt-3">
+                        <span class="fs-5 fw-bold text-dark">Total</span>
+                        <span class="fs-4 fw-bold text-danger">₹<span id="grand-total">0</span></span>
+                    </div>
+                    <a href="checkout.html" class="checkout-btn d-block text-center text-decoration-none mt-3">
+                        PROCEED TO CHECKOUT
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function () {
+            // 1. Load Header
+            $("#header-placeholder").load("header.html", function () {
+
+                // --- ACTIVE LINK LOGIC FOR PAGES ---
+                var path = window.location.pathname;
+                var page = path.split("/").pop(); // Get current filename (e.g., cart.html)
+
+                // Reset all active classes first
+                $('.navbar-nav .nav-link').removeClass('active');
+                $('.dropdown-item').removeClass('active');
+
+                // Loop through all dropdown items to find a match
+                $('.dropdown-item').each(function () {
+                    var linkHref = $(this).attr('href');
+
+                    // Check if this dropdown item matches the current page
+                    if (linkHref === page) {
+                        // 1. Activate the dropdown item itself
+                        $(this).addClass('active');
+
+                        // 2. CRITICAL: Find the parent "Pages" link and make it active
+                        $(this).closest('.nav-item.dropdown').find('.nav-link.dropdown-toggle').addClass('active');
+                    }
+                });
+                // -----------------------------------
+
+                if (typeof updateMiniCartUI === "function") updateMiniCartUI();
+
+                // Gap fix for cart page layout
+                const h1 = $('.navbar-1').outerHeight();
+                const h2 = $('.navbar-2').outerHeight();
+                if (h1 && h2) {
+                    $('.navbar-2').css('top', h1 + 'px');
+                    $('body').css('padding-top', (h1 + h2 + 20) + 'px');
+                }
+            });
+
+            $("#footer-placeholder").load("footer.html");
+
+            // --- FULL DYNAMIC CART TABLE LOGIC ---
+            function renderCartPage() {
+                let cart = JSON.parse(localStorage.getItem('electroCart')) || [];
+                let html = '';
+                let subtotal = 0;
+
+                if (cart.length === 0) {
+                    $('#cart-content').hide();
+                    $('#empty-cart-msg').fadeIn();
+                    return;
+                } else {
+                    $('#cart-content').show();
+                    $('#empty-cart-msg').hide();
+                }
+
+                cart.forEach((item, index) => {
+                    let rowTotal = item.price * item.qty;
+                    subtotal += rowTotal;
+
+                    html += `
+            <tr class="cart-row">
+                <td data-label="Product">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="${item.img}" class="product-thumb" alt="Product">
+                        <div>
+                            <h6 class="mb-0 fw-bold text-dark">${item.title}</h6>
+                        </div>
+                    </div>
+                </td>
+                <td data-label="Price" class="fw-bold">₹${item.price.toLocaleString()}</td>
+                <td data-label="Quantity">
+                    <div class="qty-input-group d-flex">
+                        <button class="qty-btn" onclick="changeCartQty(${index}, -1)">-</button>
+                        <input type="text" class="qty-input" value="${item.qty}" readonly>
+                        <button class="qty-btn" onclick="changeCartQty(${index}, 1)">+</button>
+                    </div>
+                </td>
+                <td data-label="Total" class="fw-bold text-danger">₹${rowTotal.toLocaleString()}</td>
+                <td data-label="Remove">
+                    <button class="btn btn-sm btn-light text-danger border rounded-circle" onclick="removeCartItem(${index})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>`;
+                });
+
+                $('#cart-items').html(html);
+                $('#subtotal').text(subtotal.toLocaleString());
+
+                let shipping = parseInt($('input[name="shipping"]:checked').val()) || 0;
+                $('#grand-total').text((subtotal + shipping).toLocaleString());
+            }
+
+            // Global Functions for Cart Page
+            window.changeCartQty = function (index, change) {
+                let cart = JSON.parse(localStorage.getItem('electroCart'));
+                if (cart[index].qty + change > 0) {
+                    cart[index].qty += change;
+                    localStorage.setItem('electroCart', JSON.stringify(cart));
+                    renderCartPage();
+                    if (typeof updateMiniCartUI === "function") updateMiniCartUI();
+                }
+            };
+
+            window.removeCartItem = function (index) {
+                if (confirm("Remove this item?")) {
+                    let cart = JSON.parse(localStorage.getItem('electroCart'));
+                    cart.splice(index, 1);
+                    localStorage.setItem('electroCart', JSON.stringify(cart));
+                    renderCartPage();
+                    if (typeof updateMiniCartUI === "function") updateMiniCartUI();
+                }
+            };
+
+            // Shipping Change Logic
+            $('input[name="shipping"]').change(renderCartPage);
+
+            // Initial Render call
+            renderCartPage();
+        });
+    </script>
+</body>
+
+</html>

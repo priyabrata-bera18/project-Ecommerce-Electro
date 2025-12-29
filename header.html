@@ -1,0 +1,243 @@
+<div class="navbar navbar-1 bg-custom-dark py-3 border-bottom border-3 border-danger fixed-top">
+  <div class="container-fluid flex-column flex-lg-row align-items-center">
+    <a class="navbar-brand text-white fs-1 fw-bold text-center mb-3 mb-lg-0 ps-4 ps-sm-5" href="index.html">
+      <i class="fa-solid fa-bag-shopping text-danger"></i>Electro<span class="text-danger">. </span>
+    </a>
+
+    <div class="d-flex justify-content-center mb-3 mb-lg-0" style="width: 500px; max-width: 100%;">
+      <div class="input-group rounded-pill overflow-hidden shadow">
+        <select class="form-select border-0">
+          <option selected>All Categories</option>
+          <option value="1">Electronics</option>
+          <option value="2">categories 1</option>
+          <option value="3">Categories 2</option>
+        </select>
+        <input type="search" class="form-control border-0" placeholder="Search here">
+        <button class="btn btn-danger px-4 fw-bold" type="button">
+          Search
+        </button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center gap-4 text-white pe-1 pe-sm-5">
+      <div class="text-center">
+        <a href="wishlist.html" class="text-white text-decoration-none">
+          <div class="position-relative d-inline-block">
+            <i class="fa-regular fa-heart fa-lg" style="cursor: pointer;"></i>
+            <span id="header-wishlist-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="font-size: 10px;">
+              0
+            </span>
+          </div>
+          <div>Wishlist</div>
+        </a>
+      </div>
+
+
+      <div class="text-center">
+        <a href="cart.html" class="text-white text-decoration-none">
+          <div class="position-relative d-inline-block">
+            <i class="fa-solid fa-cart-shopping fa-lg" style="cursor: pointer;"></i>
+            <span id="header-cart-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="font-size: 10px;">
+              0
+            </span>
+          </div>
+          <div>Cart</div>
+        </a>
+      </div>
+
+
+
+      <div class="text-center" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">
+        <div class="position-relative d-inline-block">
+          <i class="fa-solid fa-user fs-5" style="cursor: pointer;"></i>
+        </div>
+        <div>Login / <span>Register</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-2 navbar-expand-lg bg-custom-yellow fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand me-auto fw-bold fs-4" href="#"><i class="fa-solid fa-list text-secondary-emphasis"></i>
+      All Categories</a>
+    <div class="offcanvas offcanvas-end glass-effect" tabindex="-1" id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">All Categories</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body fs-6 fw-bold me-5">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="#">Single Page</a>
+          </li>
+          <li class="nav-item dropdown mx-lg-2">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Best seller</a></li>
+              <li><a class="dropdown-item" href="cart.html">Cart Page</a></li>
+              <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
+              <li><a class="dropdown-item" href="about_us.html">About Us</a></li>
+              <li><a class="dropdown-item" href="#">404 Error</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-modal border-0 shadow-lg">
+      <div class="modal-header bg-custom-yellow text-white rounded-top-3">
+        <h5 class="modal-title fw-bold" id="loginModalLabel">Customer Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label fw-bold">Username/Email</label>
+            <input type="text" class="form-control" id="loginEmail" placeholder="Enter your username or email" required>
+          </div>
+          <div class="mb-4">
+            <label for="loginPassword" class="form-label fw-bold">Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+              <button
+                class="btn bg-transparent border-0 shadow-none position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                type="button" onclick="togglePasswordVisibility('loginPassword', 'toggleLoginPassword')">
+                <i class="bi bi-eye-slash-fill text-muted" id="toggleLoginPassword"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger w-100 py-2 fw-bold btn-animated">Login</button>
+        </form>
+        <div class="text-center mt-3">
+          <p class="mb-0 text-muted">Did not have an account?
+            <a href="#" class="text-danger fw-bold" data-bs-target="#registerModal" data-bs-toggle="modal"
+              data-bs-dismiss="modal">Register here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-modal border-0 shadow-lg">
+      <div class="modal-header bg-custom-yellow text-white rounded-top-3">
+        <h5 class="modal-title fw-bold" id="registerModalLabel">Create an Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+          <div class="mb-3">
+            <label for="registerFullName" class="form-label fw-bold">Full Name</label>
+            <input type="text" class="form-control" id="registerFullName" placeholder="Enter your full name" required>
+          </div>
+          <div class="mb-3">
+            <label for="registerEmail" class="form-label fw-bold">Email address</label>
+            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="mb-3">
+            <label for="registerPassword" class="form-label fw-bold">Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="registerPassword" placeholder="Create a password"
+                required>
+              <button
+                class="btn bg-transparent border-0 shadow-none position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                type="button" onclick="togglePasswordVisibility('registerPassword', 'toggleRegisterPassword')">
+                <i class="bi bi-eye-slash-fill text-muted" id="toggleRegisterPassword"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="registerConfirmPassword" class="form-label fw-bold">Confirm Password</label>
+            <div class="position-relative">
+              <input type="password" class="form-control" id="registerConfirmPassword"
+                placeholder="Re-enter your password" required>
+              <button
+                class="btn bg-transparent border-0 shadow-none position-absolute end-0 top-50 translate-middle-y me-2 p-0"
+                type="button"
+                onclick="togglePasswordVisibility('registerConfirmPassword', 'toggleRegisterConfirmPassword')">
+                <i class="bi bi-eye-slash-fill text-muted" id="toggleRegisterConfirmPassword"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger w-100 py-2 fw-bold btn-animated">Create Account</button>
+        </form>
+        <div class="text-center mt-3">
+          <p class="mb-0 text-muted">Already have an account?
+            <a href="#" class="text-danger fw-bold" data-bs-target="#loginModal" data-bs-toggle="modal"
+              data-bs-dismiss="modal">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="products.js"></script>
+<script>
+  function updateHeaderCartCount() {
+    const cart = JSON.parse(localStorage.getItem('electroCart')) || [];
+    const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    document.getElementById("header-cart-count").textContent = cartCount;
+  }
+
+
+
+  function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    document.getElementById("header-wishlist-count").textContent = wishlist.length;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateWishlistCount();
+    updateHeaderCartCount();
+  });
+
+
+</script>
+<style>
+  .navbar .dropdown-menu {
+    background: #ffffff !important;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .navbar .dropdown-menu a {
+    color: #000 !important;
+    padding: 10px 15px;
+    font-weight: 500;
+  }
+
+  .navbar .dropdown-menu a:hover {
+    background: #e60023 !important;
+    color: #fff !important;
+    border-radius: 6px;
+  }
+</style>

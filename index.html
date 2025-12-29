@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&family=Segoe+UI:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="Assets/bootstrap-5.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="icon" href="Assets/Images/Fav_icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+
+    @media (max-width: 576px) {
+      body {
+        padding-top: 260px !important;
+      }
+
+      .navbar-2 {
+        top: 205px !important;
+      }
+
+      #carouselExampleAutoplaying {
+        margin-top: 0;
+        height: auto;
+        min-height: 350px;
+      }
+    }
+
+    #carouselExampleAutoplaying {
+      position: relative;
+      overflow: hidden;
+      min-height: 450px;
+      max-height: 70vh;
+      background-color: #fff;
+    }
+
+    .carousel-inner,
+    .carousel-item {
+      height: 100%;
+    }
+
+    .carousel-item .row {
+      height: 100%;
+      align-items: center;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45px;
+      height: 45px;
+      background-color: #f28b00;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 576px) {
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 38px;
+        height: 38px;
+        top: auto;
+        bottom: 15px;
+        transform: none;
+      }
+
+      .carousel-control-prev {
+        left: 25%;
+      }
+
+      .carousel-control-next {
+        right: 25%;
+      }
+    }
+
+    #cart-toast {
+      visibility: hidden;
+      min-width: 200px;
+      background: #28a745;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      z-index: 99999;
+      right: 20px;
+      bottom: 20px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #cart-toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #wishlist-toast {
+      visibility: hidden;
+      min-width: 200px;
+      background: #e60023;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      z-index: 99999;
+      right: 20px;
+      bottom: 70px;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    #wishlist-toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="products.js"></script>
+</head>
+
+<body>
+
+
+  <div id="preloader">
+    <div class="honeycomb">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div id="header-placeholder"></div>
+
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row g-0 h-100 align-items-center justify-content-center p-4 p-md-0">
+            <div class="col-12 col-md-6 text-center">
+              <img src="Assets/Images/carousel-1.png" class="img-fluid w-100" alt="Laptop"
+                onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Image+Not+Found'">
+            </div>
+            <div class="col-12 col-md-4 text-center text-md-start py-4">
+              <h5 class="text-uppercase text-muted">Save up to ₹35,000</h5>
+              <h1 class="fw-bold anim">On Selected Laptops, Desktops & Smartphones</h1>
+              <p class="text-muted">*Terms & Conditions Apply</p>
+              <a href="#" class="btn custom-orange rounded-pill px-4 pb-2 fw-bold py-2 fs-5" style="height: 50px;">Shop
+                Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="row g-0 h-100 align-items-center justify-content-center p-4 p-md-0">
+            <div class="col-12 col-md-6 text-center">
+              <img src="Assets/Images/carousel-2.png" class="img-fluid w-100" alt="Offer"
+                onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Image+Not+Found'">
+            </div>
+            <div class="col-12 col-md-4 text-center text-md-start py-4">
+              <h5 class="text-uppercase text-muted">Big Discounts Upto 20%</h5>
+              <h1 class="fw-bold anim">On Latest Gadgets, Accessories & Much more</h1>
+              <p class="text-muted">*Limited Time Only</p>
+              <a href="#" class="btn custom-orange rounded-pill px-4 fw-bold py-2 fs-5" style="height: 50px;">Shop
+                Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev ms-4" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next me-4" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+
+    <div class="container pt-4">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in-down">
+          <div class="card text-white position-relative overflow-hidden  rounded-0" style="cursor: pointer;">
+            <img src="https://themewagon.github.io/electro/img/shop01.png" class="card-img w-100" alt="Laptop">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+              style="background: linear-gradient(135deg, rgba(210, 47, 63, 0.8) 50%, transparent 50%);">
+            </div>
+            <div class="card-img-overlay d-flex flex-column justify-content-center">
+              <h4 class="fw-bold">Laptop<br>Collection</h4>
+              <h6>Shop Now <i class="fa-solid fa-arrow-right"></i></h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in-down">
+          <div class="card text-white position-relative overflow-hidden rounded-0 " style="cursor: pointer;"">
+        <img src=" https://themewagon.github.io/electro/img/shop03.png" class="card-img w-100" alt="Laptop">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+              style="background: linear-gradient(135deg, rgba(210, 47, 63, 0.8) 50%, transparent 50%);">
+            </div>
+            <div class="card-img-overlay d-flex flex-column justify-content-center">
+              <h4 class="fw-bold">Smartphone<br>Collection</h4>
+              <h6>Shop Now <i class="fa-solid fa-arrow-right"></i></h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in-down">
+          <div class="card text-white position-relative overflow-hidden rounded-0" style="cursor: pointer;">
+            <img src="https://themewagon.github.io/electro/img/shop02.png" class="card-img w-100" alt="Laptop">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+              style="background: linear-gradient(135deg, rgba(210, 47, 63, 0.8) 50%, transparent 50%);">
+            </div>
+            <div class="card-img-overlay d-flex flex-column justify-content-center">
+              <h4 class="fw-bold">Electronics<br>Accessories<br>Collection</h4>
+              <h6>Shop Now <i class="fa-solid fa-arrow-right"></i></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid py-4 overflow-hidden">
+      <div class="marquee-wrapper border border-3 mt-4 py-3">
+        <div class="marquee d-flex align-items-center">
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-rotate text-danger fs-2"></i>
+            <h5>FREE RETURN</h5>
+            <p>30 days money back guarantee</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-paper-plane text-danger fs-2"></i>
+            <h5>FREE SHIPPING</h5>
+            <p>Free shipping on all orders</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-gift text-danger fs-2"></i>
+            <h5>SUPPORT 24/7</h5>
+            <p>We support online 24 hrs a day</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-credit-card text-danger fs-2"></i>
+            <h5>RECEIVE GIFT CARD</h5>
+            <p>Receive gift all over order $50</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-lock text-danger fs-2"></i>
+            <h5>SECURE PAYMENT</h5>
+            <p>We Value Your Security</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-blog text-danger fs-2"></i>
+            <h5>ONLINE SERVICE</h5>
+            <p>Free return products in 30 days</p>
+          </div>
+
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-rotate text-danger fs-2"></i>
+            <h5>FREE RETURN</h5>
+            <p>30 days money back guarantee</p>
+          </div>
+          <div class="marquee-item text-center px-4">
+            <i class="fa-solid fa-paper-plane text-danger fs-2"></i>
+            <h5>FREE SHIPPING</h5>
+            <p>Free shipping on all orders</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-100 justify-content-center" style="min-height: 44vh; background-color: #f5f5f5;">
+      <div class="py-5">
+        <div class="row g-4 justify-content-center ">
+          <div class="col-12 col-md-6 col-lg-5">
+            <div class="card p-4 shadow-sm rounded-1" data-aos="zoom-out-right">
+              <div class="row g-0 align-items-center py-5 ps-5">
+                <div class="col-8">
+                  <p class="card-text text-muted mb-1 fs-5">Find The Best Camera for You!</p>
+                  <h2 class="card-title fw-bold text-warning">Smart Camera</h2>
+                  <h1 class="text-danger fw-bold display-4">40% Off</h1>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                  <img src="Assets/Images/pngegg.png" class="img-fluid rounded-start" alt="Smart Camera"
+                    onerror="this.src='https://placehold.co/200x200/eeeeee/cccccc?text=Camera'">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-5">
+            <div class="card p-4 shadow-sm rounded-1" data-aos="zoom-out-left">
+              <div class="row g-0 align-items-center ps-5 fs-5 py-5">
+                <div class="col-8">
+                  <p class="card-text text-muted mb-1 fs-5">Find The Best Watches for You!</p>
+                  <h2 class="card-title fw-bold text-warning">Smart Watch</h2>
+                  <h1 class="text-danger fw-bold display-4 ">20% Off</h1>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                  <img src="Assets/Images/pngegg (1).png" class="img-fluid rounded-start" alt="Smart Watch"
+                    onerror="this.src='https://placehold.co/200x200/eeeeee/cccccc?text=Watch'">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row align-items-center text-center text-md-start">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+          <h1 class="fw-bold text-dark">Our Products</h1>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end flex-wrap gap-3 ps-3 ps-md-0"
+          id="product-filters">
+          <button class="btn button text-white fw-semibold px-4 py-2 rounded-pill active" data-filter="all">
+            All Products
+          </button>
+          <button class="btn bg-body-secondary fw-semibold px-4 py-2 rounded-pill" data-filter="new">
+            New Arrivals
+          </button>
+          <button class="btn bg-body-secondary fw-semibold px-4 py-2 rounded-pill" data-filter="featured">
+            Featured
+          </button>
+          <button class="btn bg-body-secondary fw-semibold px-4 py-2 rounded-pill" data-filter="top">
+            Top Selling
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-5">
+      <div id="product-carousel" class="owl-carousel owl-theme">
+
+        <div class="product-item" data-id="1" data-category="new">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/pngegg (3).png" class="img-fluid" alt="Product"
+                onerror="this.src='https://placehold.co/300x300/eeeeee/cccccc?text=iPhone'">
+              <span class="badge-top">New</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>SmartPhone</h6>
+              <h5>Apple iPhone</h5>
+              <p class="price"><del>75,000.00</del> <span class="fw-bold text-warning">45,000</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="2" data-category="top">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/pngegg.png" class="img-fluid" alt="Product"
+                onerror="this.src='https://placehold.co/300x300/eeeeee/cccccc?text=Camera'">
+              <span class="badge-top bg-danger">Sale</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Camera</h6>
+              <h5>Sony Alpha a7 III</h5>
+              <p class="price"><del>1,10000.00</del> <span class="fw-bold text-warning">82,000.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★★</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="3" data-category="new">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/pngegg (2).png" class="img-fluid" alt="Product"
+                onerror="this.src='https://placehold.co/300x300/eeeeee/cccccc?text=Headphone'">
+              <span class="badge-top">New</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Headphone</h6>
+              <h5>BoAt Rockerz 425</h5>
+              <p class="price"><del>1999.00</del> <span class="fw-bold text-warning">1,099.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="4" data-category="new">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/pngegg (1).png" class="img-fluid" alt="Product"
+                onerror="this.src='https://placehold.co/300x300/eeeeee/cccccc?text=Watch'">
+              <span class="badge-top">New</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>SmartWatch</h6>
+              <h5>Fastrack Limitless Glide X</h5>
+              <p class="price"><del>1,799.00</del> <span class="fw-bold text-warning">1,499.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="5" data-category="featured">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="https://themewagon.github.io/electro/img/shop01.png" class="img-fluid" alt="Product">
+              <span class="badge-top bg-info">Featured</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Laptop</h6>
+              <h5>HP Pavilion x360</h5>
+              <p class="price"><del>85,000.00</del> <span class="fw-bold text-warning">72,000.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="6" data-category="featured">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/speaker.png" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/speaker.png'">
+              <span class="badge-top bg-info">Featured</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Speaker</h6>
+              <h5>Amazon Echo Dot</h5>
+              <p class="price"><del>4,499.00</del> <span class="fw-bold text-warning">3,999.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="7" data-category="featured">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/drone.webp" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/drone.webp'">
+              <span class="badge-top bg-info">Featured</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Drone</h6>
+              <h5>DJI Mini 3 Pro</h5>
+              <p class="price"><del>1,15,000.00</del> <span class="fw-bold text-warning">98,000.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★★</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="8" data-category="top">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/playstation.png" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/playstation.png'">
+              <span class="badge-top bg-success">Top</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Console</h6>
+              <h5>Sony PlayStation 5</h5>
+              <p class="price"><del>55,000.00</del> <span class="fw-bold text-warning">49,990.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★★</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="9" data-category="new">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/samsungtab.avif" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/samsungtab.avif'">
+              <span class="badge-top">New</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Tablet</h6>
+              <h5>Samsung Galaxy Tab S8</h5>
+              <p class="price"><del>68,000.00</del> <span class="fw-bold text-warning">55,000.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="10" data-category="featured">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/meta vr.webp" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/meta vr.webp'">
+              <span class="badge-top bg-info">Featured</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>VR</h6>
+              <h5>Meta Quest 3</h5>
+              <p class="price"><del>52,000.00</del> <span class="fw-bold text-warning">48,500.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★★</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="11" data-category="top">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/keyboard.webp" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/keyboard.webp'">
+              <span class="badge-top bg-success">Top</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Accessory</h6>
+              <h5>Logitech MX Keys</h5>
+              <p class="price"><del>12,995.00</del> <span class="fw-bold text-warning">9,999.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★★</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item" data-id="12" data-category="top">
+          <div class="product-card p-3 border rounded-0" data-aos="zoom-out">
+            <div class="product-img">
+              <img src="Assets/Images/monitor.jpg" class="img-fluid" alt="Product"
+                onerror="this.src='Assets/Images/monitor.jpg'">
+              <span class="badge-top bg-success">Top</span>
+              <div class="overlay view-details-btn"><i class="bi bi-eye"></i></div>
+            </div>
+            <div class="product-info">
+              <h6>Monitor</h6>
+              <h5>Dell 27" 4K Monitor</h5>
+              <p class="price"><del>35,000.00</del> <span class="fw-bold text-warning">28,000.00</span></p>
+              <button class="add-cart-btn custom-orange"><i class="bi bi-cart-fill me-2"></i>Add To Cart</button>
+              <div class="rating mt-2 fs-5">★★★★☆</div>
+              <button class="add-wishlist-btn btn btn-outline-danger w-100 mt-2">
+                <i class="fa-regular fa-heart me-2"></i>Wishlist
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="hot-deal py-5 bg-light">
+      <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <img src=" https://themewagon.github.io/electro/img/shop01.png" class="img-fluid" alt="Laptop">
+          </div>
+
+          <div class="col-md-4">
+            <div class="d-flex justify-content-center justify-content-md-between mb-4" id="countdown">
+              <div class="text-center">
+                <div
+                  class="circle bg-danger text-white rounded-circle d-flex flex-column justify-content-center align-items-center mx-2"
+                  style="width:70px; height:70px;">
+                  <h5 id="days" class="mb-0">00</h5>
+                  <small>DAYS</small>
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="circle bg-danger text-white rounded-circle d-flex flex-column justify-content-center align-items-center mx-2"
+                  style="width:70px; height:70px;">
+                  <h5 id="hours" class="mb-0">00</h5>
+                  <small>HOURS</small>
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="circle bg-danger text-white rounded-circle d-flex flex-column justify-content-center align-items-center mx-2"
+                  style="width:70px; height:70px;">
+                  <h5 id="minutes" class="mb-0">00</h5>
+                  <small>MINS</small>
+                </div>
+              </div>
+              <div class="text-center">
+                <div
+                  class="circle bg-danger text-white rounded-circle d-flex flex-column justify-content-center align-items-center mx-2"
+                  style="width:70px; height:70px;">
+                  <h5 id="seconds" class="mb-0">00</h5>
+                  <small>SECS</small>
+                </div>
+              </div>
+            </div>
+
+
+            <h3 class="fw-bold text-uppercase text-center">Hot Deal This Week</h3>
+            <p class="text-muted mb-4 text-center">New Collection up to 50% off</p>
+            <div class="d-lg-flex justify-content-lg-center">
+              <a href="#" class="btn btn-danger btn-animated rounded-pill px-4 py-2 d-block d-lg-inline mx-auto">Shop
+                Now</a>
+            </div>
+          </div>
+
+          <div class="col-md-4 mt-4 mt-md-0 ">
+            <img src=" https://themewagon.github.io/electro/img/shop03.png" class="img-fluid" alt="Headphone">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="mx-5 pt-5 cn1">
+      <div class="row">
+
+        <div class="col-lg-8">
+          <div class="row">
+
+            <div class="col-lg-4 mb-5">
+              <h4 class="section-title">Featured Products</h4>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/720X660/img1.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Purple Wireless Headphones Solo 2 HD</h6>
+                  <p class="prod-price">₹95,367</p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img2.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Powerbank 1130 mAh Blue</h6>
+                  <p class="prod-price">₹17,430</p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img3.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Nerocool EN52377 Dead Silence Gaming Cube Case</h6>
+                  <p class="prod-price">₹14,940</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <h4 class="section-title">Onsale Products</h4>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img4.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Yellow Earphones Waterproof with Bluetooth</h6>
+                  <p class="prod-price">
+                    ₹9,130 <del class="old-price">₹20,750</del>
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img4.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Camera C430W 4k Waterproof</h6>
+                  <p class="prod-price">
+                    ₹74,617 <del class="old-price">₹99,600</del>
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img5.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Smartphone 6S 32GB LTE</h6>
+                  <p class="prod-price">
+                    ₹174,300 <del class="old-price">₹273,817</del>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mb-5">
+              <h4 class="section-title">Top Rated Products</h4>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img7.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Smartwatch 2.0 LTE Wifi Waterproof</h6>
+                  <div class="stars">★★★★★</div>
+                  <p class="prod-price">₹60,175</p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img8.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">22Mps Camera 6200U with 500GB SDcard</h6>
+                  <div class="stars">★★★★☆</div>
+                  <p class="prod-price">₹248,917</p>
+                </div>
+              </div>
+
+              <div class="d-flex mb-4 small-product">
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/75X75/img9.jpg" class="prod-img">
+                <div class="ms-3">
+                  <h6 class="prod-title">Full Color LaserJet Pro M452dn</h6>
+                  <div class="stars">★★★★☆</div>
+                  <p class="prod-price">₹36,437</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-4 text-center">
+          <img src="https://transvelo.github.io/electro-html/2.0/assets/img/330X360/img1.jpg" alt="Promo"
+            class="img-fluid">
+        </div>
+
+      </div>
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <div id="cart-toast">Added to Cart!</div>
+    <div id="wishlist-toast">Added to Wishlist ❤️</div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <script>
+    $(function () {
+      // --- 1. HEADER LOADING & SETUP ---
+      $("#header-placeholder").load("header.html", function () {
+        updateMiniCartUI(); 
+
+        var path = window.location.pathname;
+        var page = path.split("/").pop() || "index.html";
+        $('.navbar-nav .nav-link').removeClass('active');
+        $('.navbar-nav a[href="' + page + '"]').addClass('active');
+
+        function fixNavbarGap() {
+          const h1 = $('.navbar-1').outerHeight();
+          const h2 = $('.navbar-2').outerHeight();
+          if (h1 && h2) {
+            $('.navbar-2').css('top', h1 + 'px');
+            $('body').css('padding-top', (h1 + h2 + 15) + 'px');
+          }
+        }
+        setTimeout(fixNavbarGap, 100);
+        window.addEventListener('resize', fixNavbarGap);
+      });
+
+      $("#footer-placeholder").load("footer.html");
+
+      $(document).on('click', '.add-cart-btn', function (e) {
+        e.preventDefault();
+
+        let card = $(this).closest('.product-card'); 
+        if (card.length === 0) card = $(this).closest('.col-md-4'); 
+
+        let title = card.find('h5').text() || card.find('h1').text();
+        let priceStr = card.find('.price span').text() || card.find('.display-4').text() || "0";
+        let price = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+        let img = card.find('img').attr('src');
+
+        if (!title) return;
+
+        let product = {
+          id: img,
+          title: title.trim(),
+          price: price,
+          img: img,
+          qty: 1
+        };
+
+
+        let cart = JSON.parse(localStorage.getItem('electroCart')) || [];
+        let existing = cart.find(item => item.id === product.id);
+
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push(product);
+        }
+
+        localStorage.setItem('electroCart', JSON.stringify(cart));
+
+        updateMiniCartUI(); 
+        showToast(); 
+      });
+
+      // --- 3. REMOVE FROM MINI CART ---
+      $(document).on('click', '.mini-cart-remove', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let index = $(this).data('index');
+        let cart = JSON.parse(localStorage.getItem('electroCart')) || [];
+
+        cart.splice(index, 1);
+        localStorage.setItem('electroCart', JSON.stringify(cart));
+        updateMiniCartUI();
+      });
+
+      // --- 4. UPDATE MINI CART UI FUNCTION (FIXED IDs) ---
+      window.updateMiniCartUI = function () {
+        let cart = JSON.parse(localStorage.getItem('electroCart')) || [];
+        let count = cart.reduce((acc, item) => acc + item.qty, 0);
+        let total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+        $('#header-cart-count').text(count);
+
+        let html = '';
+        if (cart.length === 0) {
+          html = `<div class="empty-mini-cart">
+                        <i class="fa-solid fa-cart-arrow-down" style="font-size: 30px; color: #ccc;"></i>
+                        <p class="m-0 small text-muted">No products in the cart.</p>
+                    </div>`;
+          $('#mini-cart-footer').hide(); 
+        } else {
+
+          for (let i = cart.length - 1; i >= 0; i--) {
+            let item = cart[i];
+            if (cart.length - i > 3) break; 
+
+            html += `
+                    <div class="mini-cart-item">
+                        <img src="${item.img}" class="mini-cart-img">
+                        <div class="mini-cart-info">
+                            <h6><a href="#">${item.title}</a></h6>
+                            <span>${item.qty} x <span class="text-danger fw-bold">₹${item.price.toLocaleString()}</span></span>
+                        </div>
+                        <button class="mini-cart-remove" data-index="${i}" title="Remove">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                `;
+          }
+          if (cart.length > 3) {
+            html += `<div class="text-center small text-muted py-2">+ ${cart.length - 3} more items</div>`;
+          }
+
+          $('#mini-cart-footer').show(); 
+          $('#mini-cart-subtotal').text('₹' + total.toLocaleString());
+        }
+        $('#mini-cart-list').html(html); 
+      }
+
+      function showToast() {
+        var x = document.getElementById("cart-toast");
+        if (x) { x.className = "show"; setTimeout(() => x.className = x.className.replace("show", ""), 3000); }
+      }
+
+      // --- 5. CAROUSEL & PLUGINS ---
+      AOS.init({ duration: 600, offset: 100, once: true });
+
+      $(window).on('load', function () {
+        $('#preloader').addClass('hide');
+      });
+
+      const owlOptions = { loop: false, margin: 20, nav: true, dots: true, responsive: { 0: { items: 1 }, 576: { items: 2 }, 992: { items: 4 } } };
+      const $owl = $("#product-carousel");
+      const $allItems = $owl.find(".product-item").clone(true);
+      $owl.owlCarousel(owlOptions);
+
+      $("#product-filters button").on("click", function () {
+        $("#product-filters button").removeClass("active button text-white").addClass("bg-body-secondary");
+        $(this).addClass("active button text-white").removeClass("bg-body-secondary");
+
+        let filter = $(this).data("filter");
+        $owl.trigger("destroy.owl.carousel").html("");
+
+        let items = filter === "all" ? $allItems : $allItems.filter('[data-category="' + filter + '"]');
+        $owl.append(items).owlCarousel(owlOptions);
+      });
+
+      const saleEnd = new Date("2025-12-31T23:59:59").getTime();
+      setInterval(() => {
+        const now = new Date().getTime();
+        const dist = saleEnd - now;
+        if (dist > 0) {
+          $("#days").text(Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, 0));
+          $("#hours").text(Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, 0));
+          $("#minutes").text(Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, 0));
+          $("#seconds").text(Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, 0));
+        }
+      }, 1000);
+    });
+
+    $(document).on("click", ".add-wishlist-btn", function () {
+
+      let card = $(this).closest(".product-card");
+      let title = card.find("h5").text();
+      let price = parseFloat(card.find(".price span").text().replace(/,/g, ''));
+      let img = card.find("img").attr("src");
+
+      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      if (!wishlist.some(item => item.title === title)) {
+        wishlist.push({ title, price, img });
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+        updateWishlistCount();
+        showWishlistToast();
+      } else {
+        alert("Already in Wishlist");
+      }
+    });
+
+    function showWishlistToast() {
+      let x = document.getElementById("wishlist-toast");
+      x.className = "show";
+      setTimeout(() => x.className = x.className.replace("show", ""), 2500);
+    }
+
+
+      $(document).on("click", ".view-details-btn", function () {
+    let id = $(this).closest(".product-item").data("id");
+    if (!id) return;
+    window.location.href = `product-details.html?id=${id}`;
+});
+
+  </script>
+</body>
+
+</html>
